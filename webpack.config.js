@@ -2,7 +2,7 @@ const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: {
         filename: path.resolve(__dirname, 'src/index.js')
     },
@@ -39,7 +39,7 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin ({
-            title: 'My Web Page',
+            // title: 'Virtual Keyboard',
             filename: 'index.html',
             template: 'src/index.html'
         })
