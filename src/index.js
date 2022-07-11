@@ -34,10 +34,31 @@ wrapper.append(instruction);
 
 for(let i = 0; i < 64; i++){
     let key = document.createElement('div');
+    let divMain = document.createElement('div');
+    let divSecond = document.createElement('div');
     key.classList.add('key', keys[i].className);
-    console.log(keys[i].symbol);
-    key.innerHTML = keys[i].symbol;
     keyboard.append(key);
+
+    if(key.classList.contains('key__number')){
+        key.append(divSecond);
+        divSecond.classList.add('symbolS');
+        divSecond.innerHTML = keys[i].secSymbol;
+    }
+
+    key.append(divMain);
+    divMain.classList.add('symbolM');
+    divMain.innerHTML = keys[i].symbol;
+
+
+       
+
+
+    // key.append(spanSecond);
+    // spanSecond.classList.add('symbolS');
+    // spanSecond.innerHTML = keys[i].secSymbol;
+    // key.append(spanMain);
+    // spanMain.classList.add('symbolM');
+    // spanMain.innerHTML = keys[i].symbol;
 }
 
 let bs = keyboard.children[13];
@@ -53,11 +74,14 @@ let ctrlRight = keyboard.children[60];
 
 bs.style.width = '124px';
 tab.style.width = '63px';
-del.style.width = '50px';
 cl.style.width = '135px';
 enter.style.width = '100px';
 shiftLeft.style.width = '185px';
-shiftRight.style.width = '50px';
 ctrlLeft.style.width = '80px';
 sp.style.width = '369px';
 ctrlRight.style.width = '80px';
+
+
+document.addEventListener('keydown', function(event) {
+    console.log(event.key);
+  });
