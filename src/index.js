@@ -1,21 +1,13 @@
 import './sass/main.scss';
-import {keys} from './js/createKeysObj.js';
-// import tesla from './assets/hb.jpeg'
+import { keys } from './js/createKeysObj';
 
-// const mainImage = document.getElementById("mainImage")
-// mainImage.src = tesla
-
-// const hello = require('./js/hello')
-
-
-//Отрисовка страницы
-let array = [];
-let section = document.createElement('section');
-let wrapper = document.createElement('div');
-let title = document.createElement('h1');
-let textArea = document.createElement('textarea');
-let keyboard = document.createElement('div');
-let instruction = document.createElement('div');
+// Отрисовка страницы
+const section = document.createElement('section');
+const wrapper = document.createElement('div');
+const title = document.createElement('h1');
+const textArea = document.createElement('textarea');
+const keyboard = document.createElement('div');
+const instruction = document.createElement('div');
 
 section.className = 'main';
 wrapper.className = 'wrapper';
@@ -23,6 +15,7 @@ keyboard.className = 'keyboard';
 
 title.innerHTML = 'Виртуальная клавиатура RS school';
 textArea.placeholder = 'Здесь будет отображаться введенный текст';
+textArea.classList.add('text_area');
 instruction.innerHTML = 'Клавиатура создавалась на операционной системе Windows CTRL + ALT для переключения раскладки';
 
 document.body.append(section);
@@ -32,45 +25,26 @@ wrapper.append(textArea);
 wrapper.append(keyboard);
 wrapper.append(instruction);
 
-for(let i = 0; i < 64; i++){
-    let key = document.createElement('div');
-    let divMain = document.createElement('div');
-    let divSecond = document.createElement('div');
-    key.classList.add('key', keys[i].className);
-    keyboard.append(key);
-
-    if(key.classList.contains('key__number')){
-        key.append(divSecond);
-        divSecond.classList.add('symbolS');
-        divSecond.innerHTML = keys[i].secSymbol;
-    }
-
-    key.append(divMain);
-    divMain.classList.add('symbolM');
-    divMain.innerHTML = keys[i].symbol;
-
-
-       
-
-
-    // key.append(spanSecond);
-    // spanSecond.classList.add('symbolS');
-    // spanSecond.innerHTML = keys[i].secSymbol;
-    // key.append(spanMain);
-    // spanMain.classList.add('symbolM');
-    // spanMain.innerHTML = keys[i].symbol;
+for (let i = 0; i < 64; i++) {
+  const key = document.createElement('div');
+  const div = document.createElement('div');
+  key.classList.add('key', keys[i].className);
+  keyboard.append(key);
+  key.append(div);
+  div.classList.add('symbol');
+  div.innerHTML = keys[i].symbol;
 }
 
-let bs = keyboard.children[13];
-let tab = keyboard.children[14];
-let del = keyboard.children[28];
-let cl = keyboard.children[29];
-let enter = keyboard.children[41];
-let shiftLeft = keyboard.children[42];
-let shiftRight = keyboard.children[54];
-let ctrlLeft = keyboard.children[55];
-let sp = keyboard.children[58];
-let ctrlRight = keyboard.children[60];
+const bs = keyboard.children[13];
+const tab = keyboard.children[14];
+// const del = keyboard.children[28];
+const cl = keyboard.children[29];
+const enter = keyboard.children[41];
+const shiftLeft = keyboard.children[42];
+// const shiftRight = keyboard.children[54];
+const ctrlLeft = keyboard.children[55];
+const sp = keyboard.children[58];
+const ctrlRight = keyboard.children[60];
 
 bs.style.width = '124px';
 tab.style.width = '63px';
@@ -81,7 +55,64 @@ ctrlLeft.style.width = '80px';
 sp.style.width = '369px';
 ctrlRight.style.width = '80px';
 
+// Функционал кнопок
+let inputKeys = '';
 
-document.addEventListener('keydown', function(event) {
-    console.log(event.key);
-  });
+document.addEventListener('keydown', (event) => {
+  for (let i = 0; i < 64; i++) {
+    if (event.code === keys[i].code) {
+      if (event.key === 'Shift') {
+        for (let j = 0; j < 64; j++) {
+          const key = keyboard.children[j];
+          if (keys[j].className !== 'key__manage') {
+            key.innerHTML = keys[j].secSymbol;
+          }
+        }
+      // eslint-disable-next-line no-bitwise
+      } else if (event.key === 'CapsLock') {
+        for (let j = 0; j < 64; j++) {
+          const key = keyboard.children[j];
+          if (keys[j].className !== 'key__manage') {
+            key.innerHTML = keys[j].secSymbol;
+          }
+        }
+      } else if (event.key === 'Alt' || event.key === 'Control') {
+        console.log('Alt or Ctrl');
+      } else if (event.key === 'Delete') {
+        console.log('Delete');
+      } else if (event.key === 'Backspace') {
+        inputKeys = '';
+        for (let k = 0; k < inputKeys.length; k++) {
+          inputKeys += k;
+        }
+        textArea.innerHTML = inputKeys;
+        console.log('Backspace');
+      } else if (event.key === 'Tab') {
+        console.log('Tab');
+      } else if (event.key === 'Enter') {
+        console.log('Enter');
+      } else {
+        inputKeys += keys[i].symbol;
+        textArea.innerHTML = inputKeys;
+      }
+      event.preventDefault();
+      textArea.focus();
+      keyboard.children[i].classList.add('press_key');
+    }
+  }
+});
+
+document.addEventListener('keyup', (event) => {
+  for (let i = 0; i < 64; i++) {
+    if (event.code === keys[i].code) {
+      if (event.key === 'Shift') {
+        for (let j = 0; j < 64; j++) {
+          const key = keyboard.children[j];
+          key.innerHTML = keys[j].symbol;
+        }
+      }
+      event.preventDefault();
+      keyboard.children[i].classList.remove('press_key');
+    }
+  }
+});
