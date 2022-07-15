@@ -11,8 +11,9 @@ class Keys {
   }
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export const keys = [
-  new Keys('Backquote', '`', '~', null, null, 'key__number'),
+  new Keys('Backquote', '`', '~', 'ё', 'Ё', 'key__symbol'),
   new Keys('Digit1', '1', '!', null, null, 'key__number'),
   new Keys('Digit2', '2', '@', null, null, 'key__number'),
   new Keys('Digit3', '3', '#', null, null, 'key__number'),

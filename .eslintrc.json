@@ -14,6 +14,7 @@
         "linebreak-style": ["error", "windows"],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
         "prefer-arrow-callback": "off",
-        "func-names": "off"
+        "func-names": "off",
+        "no-unused-expressions": "off"
     }
 }

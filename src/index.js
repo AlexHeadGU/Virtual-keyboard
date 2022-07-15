@@ -57,35 +57,47 @@ ctrlRight.style.width = '80px';
 
 // Функционал кнопок
 let inputKeys = '';
+// let keyboardLayout;
+// const symbols = document.querySelectorAll('.key__symbol');
 
 document.addEventListener('keydown', (event) => {
+  if (event.shiftKey) {
+    if (!event.repeat) {
+      console.log('Shift');
+    } else {
+      console.log('rep - Shift');
+    }
+  }
   for (let i = 0; i < 64; i++) {
     if (event.code === keys[i].code) {
-      if (event.key === 'Shift') {
-        for (let j = 0; j < 64; j++) {
-          const key = keyboard.children[j];
-          if (keys[j].className !== 'key__manage') {
-            key.innerHTML = keys[j].secSymbol;
-          }
-        }
-      // eslint-disable-next-line no-bitwise
-      } else if (event.key === 'CapsLock') {
-        for (let j = 0; j < 64; j++) {
-          const key = keyboard.children[j];
-          if (keys[j].className !== 'key__manage') {
-            key.innerHTML = keys[j].secSymbol;
-          }
-        }
+      // shift
+      // for (let j = 0; j < 64; j++) {
+      //   const key = keyboard.children[j];
+      //   if (keys[j].className !== 'key__manage' && keys[0].symbol === keyboard.firstChild.innerText) {
+      //     key.innerHTML = keys[j].secSymbol;
+      //   } else if (keys[j].className !== 'key__manage' && keys[0].secSymbol === keyboard.firstChild.innerText) {
+      //     key.innerHTML = keys[j].symbol;
+      //   }
+      // }
+      if (event.key === 'CapsLock') {
+        console.log('CapsLock');
+        // cl.classList.toggle('caps-is-on');
+        // for (let j = 0; j < 64; j++) {
+        //   const key = keyboard.children[j];
+        //   if (keys[j].className !== 'key__manage') {
+        //     key.innerHTML = keys[j].secSymbol;
+        //   }
+        // }
       } else if (event.key === 'Alt' || event.key === 'Control') {
         console.log('Alt or Ctrl');
       } else if (event.key === 'Delete') {
         console.log('Delete');
       } else if (event.key === 'Backspace') {
-        inputKeys = '';
-        for (let k = 0; k < inputKeys.length; k++) {
-          inputKeys += k;
-        }
-        textArea.innerHTML = inputKeys;
+        // inputKeys = '';
+        // for (let k = 0; k < inputKeys.length; k++) {
+        //   inputKeys += k;
+        // }
+        // textArea.innerHTML = inputKeys;
         console.log('Backspace');
       } else if (event.key === 'Tab') {
         console.log('Tab');
@@ -106,10 +118,10 @@ document.addEventListener('keyup', (event) => {
   for (let i = 0; i < 64; i++) {
     if (event.code === keys[i].code) {
       if (event.key === 'Shift') {
-        for (let j = 0; j < 64; j++) {
-          const key = keyboard.children[j];
-          key.innerHTML = keys[j].symbol;
-        }
+        // for (let j = 0; j < 64; j++) {
+        //   const key = keyboard.children[j];
+        //   key.innerHTML = keys[j].symbol;
+        // }
       }
       event.preventDefault();
       keyboard.children[i].classList.remove('press_key');
