@@ -56,73 +56,114 @@ sp.style.width = '369px';
 ctrlRight.style.width = '80px';
 
 // Функционал кнопок
-let inputKeys = '';
-// let keyboardLayout;
-// const symbols = document.querySelectorAll('.key__symbol');
-
-document.addEventListener('keydown', (event) => {
-  if (event.shiftKey) {
-    if (!event.repeat) {
-      console.log('Shift');
-    } else {
-      console.log('rep - Shift');
+const switchDirectShift = () => {
+  for (let j = 0; j < 64; j++) {
+    if (keys[j].className === 'key__symbol' && keys[52].symbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secSymbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].secSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].symbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].ruSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secRuSymbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].secRuSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].ruSymbol;
+    }
+    if (keys[j].className === 'key__number' && keys[12].symbol === keyboard.children[12].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secSymbol;
+    } else if (keys[j].className === 'key__number' && keys[12].secSymbol === keyboard.children[12].innerText) {
+      keyboard.children[j].innerHTML = keys[j].symbol;
     }
   }
+};
+
+const switchDirectCaps = () => {
+  for (let j = 0; j < 64; j++) {
+    if (keys[j].className === 'key__symbol' && keys[52].symbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secSymbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].secSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].symbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].ruSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secRuSymbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].secRuSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].ruSymbol;
+    }
+  }
+};
+
+const switchLanguage = () => {
+  for (let j = 0; j < 64; j++) {
+    if (keys[j].className === 'key__symbol' && keys[52].symbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].ruSymbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].secSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secRuSymbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].ruSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].symbol;
+    } else if (keys[j].className === 'key__symbol' && keys[52].secRuSymbol === keyboard.children[52].innerText) {
+      keyboard.children[j].innerHTML = keys[j].secSymbol;
+    }
+  }
+};
+
+const backspaceDelete = (shift) => {
+  const str = textArea.value;
+  const position = textArea.selectionStart - 1;
+  if (textArea.selectionStart === textArea.selectionEnd) {
+    textArea.value = `${str.substring(0, position + shift)}${str.substring(position + shift + 1)}`;
+    textArea.selectionStart = position + shift;
+    textArea.selectionEnd = textArea.selectionStart;
+  } else {
+    textArea.setRangeText('', textArea.selectionStart, textArea.selectionEnd, 'end');
+  }
+};
+
+document.addEventListener('keydown', (event) => {
   for (let i = 0; i < 64; i++) {
     if (event.code === keys[i].code) {
-      // shift
-      // for (let j = 0; j < 64; j++) {
-      //   const key = keyboard.children[j];
-      //   if (keys[j].className !== 'key__manage' && keys[0].symbol === keyboard.firstChild.innerText) {
-      //     key.innerHTML = keys[j].secSymbol;
-      //   } else if (keys[j].className !== 'key__manage' && keys[0].secSymbol === keyboard.firstChild.innerText) {
-      //     key.innerHTML = keys[j].symbol;
-      //   }
-      // }
-      if (event.key === 'CapsLock') {
-        console.log('CapsLock');
-        // cl.classList.toggle('caps-is-on');
-        // for (let j = 0; j < 64; j++) {
-        //   const key = keyboard.children[j];
-        //   if (keys[j].className !== 'key__manage') {
-        //     key.innerHTML = keys[j].secSymbol;
-        //   }
-        // }
-      } else if (event.key === 'Alt' || event.key === 'Control') {
-        console.log('Alt or Ctrl');
-      } else if (event.key === 'Delete') {
-        console.log('Delete');
+      if (event.key === 'Shift' && !event.repeat) {
+        switchDirectShift();
+      } else if (event.key === 'Shift' && event.repeat) {
+        break;
+      } else if (event.key === 'CapsLock') {
+        cl.classList.toggle('caps-is-on');
+        switchDirectCaps();
+      } else if (event.key === 'ArrowLeft') {
+        if (textArea.selectionStart !== 0) {
+          textArea.selectionEnd -= 1;
+        }
+      } else if (event.key === 'ArrowRight') {
+        if (textArea.selectionStart !== textArea.value.length) {
+          textArea.selectionStart += 1;
+        }
       } else if (event.key === 'Backspace') {
-        // inputKeys = '';
-        // for (let k = 0; k < inputKeys.length; k++) {
-        //   inputKeys += k;
-        // }
-        // textArea.innerHTML = inputKeys;
-        console.log('Backspace');
+        backspaceDelete(0);
+      } else if (event.key === 'Delete') {
+        backspaceDelete(1);
       } else if (event.key === 'Tab') {
-        console.log('Tab');
+        const position = textArea.selectionStart - 1;
+        textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
+        textArea.selectionStart = position + 5;
+        textArea.selectionEnd = textArea.selectionStart;
+
+        // textArea.value += '    ';
       } else if (event.key === 'Enter') {
         console.log('Enter');
-      } else {
-        inputKeys += keys[i].symbol;
-        textArea.innerHTML = inputKeys;
+      } else if (event.altKey && event.ctrlKey) {
+        switchLanguage();
+      } else if (!(event.key === 'Control' || event.key === 'Alt')) {
+        textArea.value += keyboard.children[i].textContent;
       }
-      event.preventDefault();
-      textArea.focus();
       keyboard.children[i].classList.add('press_key');
     }
   }
+  event.preventDefault();
+  textArea.focus();
 });
 
 document.addEventListener('keyup', (event) => {
+  if (event.key === 'Shift') {
+    switchDirectShift();
+  }
   for (let i = 0; i < 64; i++) {
     if (event.code === keys[i].code) {
-      if (event.key === 'Shift') {
-        // for (let j = 0; j < 64; j++) {
-        //   const key = keyboard.children[j];
-        //   key.innerHTML = keys[j].symbol;
-        // }
-      }
       event.preventDefault();
       keyboard.children[i].classList.remove('press_key');
     }
