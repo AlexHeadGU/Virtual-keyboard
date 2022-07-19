@@ -6,7 +6,8 @@ const section = document.createElement('section');
 const wrapper = document.createElement('div');
 const title = document.createElement('h1');
 const textArea = document.createElement('textarea');
-const keyboard = document.createElement('div');
+// eslint-disable-next-line import/prefer-default-export
+export const keyboard = document.createElement('div');
 const instruction = document.createElement('div');
 
 section.className = 'main';
@@ -37,11 +38,9 @@ for (let i = 0; i < 64; i++) {
 
 const bs = keyboard.children[13];
 const tab = keyboard.children[14];
-// const del = keyboard.children[28];
 const cl = keyboard.children[29];
 const enter = keyboard.children[41];
 const shiftLeft = keyboard.children[42];
-// const shiftRight = keyboard.children[54];
 const ctrlLeft = keyboard.children[55];
 const sp = keyboard.children[58];
 const ctrlRight = keyboard.children[60];
@@ -142,10 +141,8 @@ document.addEventListener('keydown', (event) => {
         textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
         textArea.selectionStart = position + 5;
         textArea.selectionEnd = textArea.selectionStart;
-
-        // textArea.value += '    ';
       } else if (event.key === 'Enter') {
-        console.log('Enter');
+        textArea.value += '\n';
       } else if (event.altKey && event.ctrlKey) {
         switchLanguage();
       } else if (!(event.key === 'Control' || event.key === 'Alt')) {

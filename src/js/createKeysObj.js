@@ -1,5 +1,3 @@
-import './keys.js';
-
 class Keys {
   constructor(code, symbol, secSymbol, ruSymbol, secRuSymbol, className) {
     this.code = code;
