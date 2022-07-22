@@ -9,7 +9,11 @@
     height: 50px;
 }
 
-.press_key, .caps-is-on{
+.press_key, .caps-is-on {
     background-color: blue;
     transform: scale(0.7, 0.7);
+}
+
+.keyOver {
+    background-color: red;
 }

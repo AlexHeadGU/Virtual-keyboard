@@ -44,6 +44,7 @@ const shiftLeft = keyboard.children[42];
 const ctrlLeft = keyboard.children[55];
 const sp = keyboard.children[58];
 const ctrlRight = keyboard.children[60];
+const keysOver = document.querySelectorAll('.key');
 
 bs.style.width = '124px';
 tab.style.width = '63px';
@@ -114,6 +115,65 @@ const backspaceDelete = (shift) => {
   }
 };
 
+const tabEnterInsert = (value, posValue) => {
+  const position = textArea.selectionStart - 1;
+  textArea.setRangeText(value, textArea.selectionStart, textArea.selectionEnd, 'end');
+  textArea.selectionStart = position + posValue;
+  textArea.selectionEnd = textArea.selectionStart;
+};
+
+keysOver.forEach((element) => {
+  element.addEventListener('mouseover', () => {
+    element.classList.add('keyOver');
+  });
+  element.addEventListener('mouseout', () => {
+    element.classList.remove('keyOver');
+    element.classList.remove('press_key');
+  });
+  element.addEventListener('mousedown', () => {
+    if (element.textContent === 'Shift') {
+      switchDirectShift();
+    }
+    element.classList.add('press_key');
+    element.classList.remove('keyOver');
+  });
+  element.addEventListener('mouseup', () => {
+    if (element.textContent === 'Shift') {
+      switchDirectShift();
+    }
+    element.classList.remove('press_key');
+  });
+
+  element.addEventListener('click', (event) => {
+    if (element.classList.contains('key__symbol') || element.classList.contains('key__number')) {
+      textArea.value += element.textContent;
+    } else if (element.textContent === 'DEL') {
+      backspaceDelete(1);
+    } else if (element.textContent === 'Backspace') {
+      backspaceDelete(0);
+    } else if (element.textContent === 'Enter') {
+      tabEnterInsert('\n', 2);
+    } else if (element.textContent === 'Caps Lock') {
+      cl.classList.toggle('caps-is-on');
+      switchDirectCaps();
+    } else if (element.textContent === 'Tab') {
+      tabEnterInsert('    ', 5);
+    } else if (element.textContent === '◄') {
+      if (textArea.selectionStart !== 0) {
+        textArea.selectionEnd -= 1;
+      }
+    } else if (element.textContent === '►') {
+      if (textArea.selectionStart !== textArea.value.length) {
+        textArea.selectionStart += 1;
+      }
+    } else if (element.textContent === '▼' || element.textContent === '▲') {
+      tabEnterInsert(element.textContent, 2);
+    }
+    event.preventDefault();
+    textArea.focus();
+  });
+});
+
 document.addEventListener('keydown', (event) => {
   for (let i = 0; i < 64; i++) {
     if (event.code === keys[i].code) {
@@ -137,16 +197,13 @@ document.addEventListener('keydown', (event) => {
       } else if (event.key === 'Delete') {
         backspaceDelete(1);
       } else if (event.key === 'Tab') {
-        const position = textArea.selectionStart - 1;
-        textArea.setRangeText('    ', textArea.selectionStart, textArea.selectionEnd, 'end');
-        textArea.selectionStart = position + 5;
-        textArea.selectionEnd = textArea.selectionStart;
+        tabEnterInsert('    ', 5);
       } else if (event.key === 'Enter') {
-        textArea.value += '\n';
+        tabEnterInsert('\n', 2);
       } else if (event.altKey && event.ctrlKey) {
         switchLanguage();
       } else if (!(event.key === 'Control' || event.key === 'Alt')) {
-        textArea.value += keyboard.children[i].textContent;
+        tabEnterInsert(keyboard.children[i].textContent, 2);
       }
       keyboard.children[i].classList.add('press_key');
     }
