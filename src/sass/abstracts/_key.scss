@@ -2,18 +2,30 @@
 
 .key {
     display: flex;
+    background-color: $COLOR-KEY;
     justify-content: center;
     align-items: center;
     border: 3px solid black;
     width: 50px;
     height: 50px;
+    border-radius: 10%;
 }
 
 .press_key, .caps-is-on {
-    background-color: blue;
-    transform: scale(0.7, 0.7);
+    background-color: $COLOR-PUSH;
+    border-radius: 20%;
+    animation: animation_reduce 1s ease-in-out;
+}
+
+@keyframes animation_reduce{
+    0% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(0.9, 0.9);
+    }
 }
 
 .keyOver {
-    background-color: red;
+    background-color: $COLOR-OVER;
 }
