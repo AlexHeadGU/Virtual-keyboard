@@ -1,9 +1,6 @@
 .keyboard {
     display: flex;
-    // grid-template-columns: repeat(15, 1fr);
     gap: 10px 5px;
     flex-wrap: wrap;
     width: 923px;
-    // grid-column-gap: 5px;
-    // grid-row-gap: 10px;
 }

@@ -9,15 +9,17 @@ const textArea = document.createElement('textarea');
 // eslint-disable-next-line import/prefer-default-export
 export const keyboard = document.createElement('div');
 const instruction = document.createElement('div');
+const p = document.createElement('p');
 
 section.className = 'main';
 wrapper.className = 'wrapper';
 keyboard.className = 'keyboard';
+p.className = 'instruction';
 
 title.innerHTML = 'Виртуальная клавиатура RS school';
 textArea.placeholder = 'Здесь будет отображаться введенный текст';
 textArea.classList.add('text_area');
-instruction.innerHTML = 'Клавиатура создавалась на операционной системе Windows CTRL + ALT для переключения раскладки';
+p.innerHTML = 'Клавиатура создавалась на операционной системе Windows<br>CTRL + ALT для переключения раскладки';
 
 document.body.append(section);
 section.append(wrapper);
@@ -25,6 +27,7 @@ wrapper.append(title);
 wrapper.append(textArea);
 wrapper.append(keyboard);
 wrapper.append(instruction);
+instruction.append(p);
 
 for (let i = 0; i < 64; i++) {
   const key = document.createElement('div');
