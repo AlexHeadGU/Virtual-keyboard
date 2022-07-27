@@ -16,8 +16,8 @@ wrapper.className = 'wrapper';
 keyboard.className = 'keyboard';
 p.className = 'instruction';
 
-title.innerHTML = 'Виртуальная клавиатура RS school';
-textArea.placeholder = 'Здесь будет отображаться введенный текст';
+title.innerHTML = 'Виртуальная клавиатура RSS';
+textArea.placeholder = 'Здесь будет отображаться введенный текст...';
 textArea.classList.add('text_area');
 p.innerHTML = 'Клавиатура создавалась на операционной системе Windows<br>CTRL + ALT для переключения раскладки';
 
@@ -156,6 +156,8 @@ keysOver.forEach((element) => {
       backspaceDelete(0);
     } else if (element.textContent === 'Enter') {
       tabEnterInsert('\n', 2);
+    } else if (element.textContent === ' ') {
+      tabEnterInsert(' ', 2);
     } else if (element.textContent === 'Caps Lock') {
       cl.classList.toggle('caps-is-on');
       switchDirectCaps();

@@ -35,7 +35,7 @@ export const keys = [
   new Keys('KeyU', 'u', 'U', 'г', 'Г', 'key__symbol'),
   new Keys('KeyI', 'i', 'I', 'ш', 'Ш', 'key__symbol'),
   new Keys('KeyO', 'o', 'O', 'щ', 'Щ', 'key__symbol'),
-  new Keys('KeyP', 'p', 'P', 'х', 'Х', 'key__symbol'),
+  new Keys('KeyP', 'p', 'P', 'з', 'З', 'key__symbol'),
   new Keys('BracketLeft', '[', '{', 'х', 'Х', 'key__symbol'),
   new Keys('BracketRight', ']', '}', 'ъ', 'Ъ', 'key__symbol'),
   new Keys('Backslash', '\\', '|', '\\', '/', 'key__symbol'),

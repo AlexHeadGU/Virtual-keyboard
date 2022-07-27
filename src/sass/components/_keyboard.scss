@@ -1,7 +1,10 @@
+@import '/src/sass/abstracts/variables';
+
 .keyboard {
     display: flex;
     gap: 10px 5px;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
+    background-color: $COLOR-BACKGROUND;
     width: 100%;
     user-select: none;
     border: 1px solid #e1e6f5;
