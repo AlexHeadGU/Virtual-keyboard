@@ -2,5 +2,10 @@
     display: flex;
     gap: 10px 5px;
     flex-wrap: wrap;
-    width: 923px;
+    width: 100%;
+    user-select: none;
+    border: 1px solid #e1e6f5;
+    box-shadow: 0 0 5px #888;
+    padding: 10px;
+    border-radius: 10px;
 }

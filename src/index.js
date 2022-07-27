@@ -44,19 +44,21 @@ const tab = keyboard.children[14];
 const cl = keyboard.children[29];
 const enter = keyboard.children[41];
 const shiftLeft = keyboard.children[42];
+// const shiftRight = keyboard.children[54];
 const ctrlLeft = keyboard.children[55];
 const sp = keyboard.children[58];
 const ctrlRight = keyboard.children[60];
 const keysOver = document.querySelectorAll('.key');
 
-bs.style.width = '124px';
-tab.style.width = '63px';
+bs.style.width = '130px';
+tab.style.width = '71px';
 cl.style.width = '135px';
 enter.style.width = '100px';
 shiftLeft.style.width = '185px';
-ctrlLeft.style.width = '80px';
-sp.style.width = '369px';
-ctrlRight.style.width = '80px';
+// shiftRight.style.width = '79px';
+ctrlLeft.style.width = '75px';
+sp.style.width = '363px';
+ctrlRight.style.width = '75px';
 
 // Функционал кнопок
 const switchDirectShift = () => {
