@@ -8,12 +8,11 @@
     border: 3px solid black;
     width: 50px;
     height: 50px;
-    border-radius: 10%;
+    border-radius: 10px;
 }
 
 .press_key, .caps-is-on {
     background-color: $COLOR-PUSH;
-    border-radius: 10%;
     animation: animation_reduce 0.1s linear forwards;
 }
 
